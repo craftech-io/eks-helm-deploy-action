@@ -1,5 +1,5 @@
 # action.yml
-name: 'EKS Helm Deploy'
+name: 'EKS Helm Deployment'
 description: 'Deploy a helm chart to EKS cluster.'
 branding:
     icon: anchor
