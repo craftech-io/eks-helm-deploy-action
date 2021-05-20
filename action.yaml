@@ -43,7 +43,7 @@ inputs:
         default: 0
 runs:
     using: 'docker'
-    image: 'docker://craftech/eks-helm-deploy-action:v0.0.3'
+    image: 'Dockerfile'
     env:
         AWS_REGION: ${{ inputs.aws-region }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
