@@ -13,7 +13,7 @@ else
 fi
 
 # Helm Deployment
-DEPS_UPDATE_COMMAND="helm dependency update"
+DEPS_UPDATE_COMMAND="helm dependency update ${DEPLOY_CHART_PATH}"
 UPGRADE_COMMAND="helm upgrade --timeout ${TIMEOUT}"
 for config_file in ${DEPLOY_CONFIG_FILES//,/ }
 do
