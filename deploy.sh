@@ -13,8 +13,8 @@ else
 fi
 
 # Helm Deployment
-DEPS_UPDATE_COMMAND="helm dependency update &&"
-UPGRADE_COMMAND="helm upgrade --timeout ${TIMEOUT}"
+DEPS_UPDATE_COMMAND=""
+UPGRADE_COMMAND="helm dependency update && helm upgrade --timeout ${TIMEOUT}"
 for config_file in ${DEPLOY_CONFIG_FILES//,/ }
 do
     UPGRADE_COMMAND="${UPGRADE_COMMAND} -f ${config_file}"
@@ -25,9 +25,10 @@ fi
 if [ -n "$DEPLOY_VALUES" ]; then
     UPGRADE_COMMAND="${UPGRADE_COMMAND} --set ${DEPLOY_VALUES}"
 fi
-if [ $UPDATE_DEPS ]; then
+if [ "$UPDATE_DEPS" = true ]; then
     UPGRADE_COMMAND="${DEPS_UPGRADE_COMMAND} ${UPGRADE_COMMAND} --set ${DEPLOY_VALUES}"
 fi
 UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
+echo "${UPDATE_DEPS}"
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}

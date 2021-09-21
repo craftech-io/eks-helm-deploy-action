@@ -44,7 +44,7 @@ inputs:
     update-deps:
         description: 'Update chart dependencies'
         required: false
-        default: true
+        default: "true"
 runs:
     using: 'docker'
     image: 'Dockerfile'
