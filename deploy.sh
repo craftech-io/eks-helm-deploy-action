@@ -13,6 +13,7 @@ else
 fi
 
 # Helm Deployment
+DEPS_UPDATE_COMMAND="helm dependency update &&"
 UPGRADE_COMMAND="helm upgrade --timeout ${TIMEOUT}"
 for config_file in ${DEPLOY_CONFIG_FILES//,/ }
 do
@@ -23,6 +24,9 @@ if [ -n "$DEPLOY_NAMESPACE" ]; then
 fi
 if [ -n "$DEPLOY_VALUES" ]; then
     UPGRADE_COMMAND="${UPGRADE_COMMAND} --set ${DEPLOY_VALUES}"
+fi
+if [ $UPDATE_DEPS ]; then
+    UPGRADE_COMMAND="${DEPS_UPGRADE_COMMAND} ${UPGRADE_COMMAND} --set ${DEPLOY_VALUES}"
 fi
 UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
 echo "Executing: ${UPGRADE_COMMAND}"

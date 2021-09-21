@@ -41,6 +41,10 @@ inputs:
         description: 'Timeout for the job.'
         required: true
         default: 0
+    update-deps:
+        description: 'Update chart dependencies'
+        required: false
+        default: "true"
 runs:
     using: 'docker'
     image: 'Dockerfile'
@@ -56,3 +60,4 @@ runs:
         DEPLOY_NAME: ${{ inputs.name }}
         DEPLOY_CHART_PATH: ${{ inputs.chart-path }}
         TIMEOUT: ${{ inputs.timeout }}
+        UPDATE_DEPS: ${{ inputs.update-deps }}
