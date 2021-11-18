@@ -23,4 +23,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: mapleeit/eks-helm-deploy-action:${GITHUB_REF##*/}
+          tags: mapleeit/eks-helm-deploy-action:${GITHUB_REF#refs/*/}

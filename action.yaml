@@ -46,9 +46,9 @@ inputs:
         required: false
         default: "true"
     install:
-        description: 'If a release by this name doesn't already exist, run an install'
+        description: 'If a release by this name does not already exist, run an install'
         required: false
-        default: "false"
+        default: ""
 runs:
     using: 'docker'
     image: 'Dockerfile'
