@@ -20,6 +20,7 @@ Following inputs can be used as `step.with` keys
 | `values`      | String  | Comma separates list of value set for helms. e.x: key1=value1,key2=value2 |
 | `name`      | String  | The name of the helm release |
 | `chart-path`      | String  | The path to the chart. (defaults to `helm/`) |
+| `install` | String | If a release by this name doesn't already exist, run an install. (defaults to `false`) |
 
 
 ## Example usage
@@ -36,4 +37,5 @@ with:
   namespace: dev
   values: key1=value1,key2=value2
   name: release_name
+  install: false
 ```
