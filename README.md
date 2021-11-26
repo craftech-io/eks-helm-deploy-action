@@ -34,7 +34,7 @@ jobs:
         aws-region: us-west-2
     
     - name: Deploy via Helm
-      uses: mapleeit/eks-helm-deploy-action@v1.3
+      uses: mapleeit/eks-helm-deploy-action@v1.3.0
       with:
         aws-region: us-west-2
         cluster-name: mycluster
