@@ -10,8 +10,6 @@ Following inputs can be used as `step.with` keys
 
 | Name             | Type    | Description                        |
 |------------------|---------|------------------------------------|
-| `aws-secret-access-key`          | String  | AWS secret access key part of the aws credentials. This is used to login to EKS. |
-| `aws-access-key-id`      | String  | AWS access key id part of the aws credentials. This is used to login to EKS. |
 | `aws-region`      | String  | AWS region to use. This must match the region your desired cluster lies in. |
 | `cluster-name`      | String  | The name of the desired cluster. |
 | `cluster-role-arn`      | String  | If you wish to assume an admin role, provide the role arn here to login as. |
@@ -26,16 +24,24 @@ Following inputs can be used as `step.with` keys
 ## Example usage
 
 ```yaml
-uses: craftech-io/eks-helm-deploy-action@v1
-with:
-  aws-access-key-id: ${{ secrets.AWS_ACCESS__KEY_ID }}
-  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  aws-region: us-west-2
-  cluster-name: mycluster
-  config-files: .github/values/dev.yaml
-  chart-path: chart/
-  namespace: dev
-  values: key1=value1,key2=value2
-  name: release_name
-  install: 'true'
+jobs:
+  helm-deploy:
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+    
+    - name: Deploy via Helm
+      uses: mapleeit/eks-helm-deploy-action@v1.3
+      with:
+        aws-region: us-west-2
+        cluster-name: mycluster
+        config-files: .github/values/dev.yaml
+        chart-path: chart/
+        namespace: dev
+        values: key1=value1,key2=value2
+        name: release_name
+        install: 'true'
 ```
