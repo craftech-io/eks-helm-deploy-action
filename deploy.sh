@@ -15,6 +15,7 @@ fi
 # Helm Deployment
 
 if [ -n "$HELM_REPOSITORY" ]; then
+   HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
    DEPS_UPDATE_COMMAND="helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
 else
    DEPS_UPDATE_COMMAND="helm dependency update ${DEPLOY_CHART_PATH}"
