@@ -13,7 +13,13 @@ else
 fi
 
 # Helm Deployment
-DEPS_UPDATE_COMMAND="helm dependency update ${DEPLOY_CHART_PATH}"
+
+if [ -n "$HELM_REPOSITORY" ]; then
+   DEPS_UPDATE_COMMAND="helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+else
+   DEPS_UPDATE_COMMAND="helm dependency update ${DEPLOY_CHART_PATH}"
+fi
+
 UPGRADE_COMMAND="helm upgrade --timeout ${TIMEOUT}"
 for config_file in ${DEPLOY_CONFIG_FILES//,/ }
 do
