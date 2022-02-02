@@ -35,8 +35,14 @@ inputs:
         required: true
     chart-path:
         description: 'The path of the chart.'
-        required: true
+        required: false
         default: 'helm/'
+    chart-repository:
+        description: 'The repository of the chart.'
+        required: false
+    chart-name:
+        description: 'The name repository of the chart.'
+        required: false
     timeout:
         description: 'Timeout for the job.'
         required: true
@@ -61,3 +67,5 @@ runs:
         DEPLOY_CHART_PATH: ${{ inputs.chart-path }}
         TIMEOUT: ${{ inputs.timeout }}
         UPDATE_DEPS: ${{ inputs.update-deps }}
+        HELM_REPOSITORY: ${{ inputs.chart-repository }}
+        HELM_CHART_NAME: ${{ inputs.chart-name }}
