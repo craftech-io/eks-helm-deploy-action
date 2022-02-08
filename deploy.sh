@@ -17,12 +17,12 @@ fi
 ####################
 # Dependency Update
 ####################
-echo "Variables: ${HELM_CHART_NAME} - ${REPO_USERNAME} - ${HELM_REPOSITORY}}"
+echo "Variables: ${HELM_CHART_NAME} - ${REPO_USERNAME} - ${HELM_REPOSITORY}"
 # Verify local or remote repository
 if [  -z  ${HELM_CHART_NAME} ]; then
     HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
 fi
-if [ -z "$HELM_REPOSITORY" ]; then
+if [ ! -z "$HELM_REPOSITORY" ]; then
     #Verify basic auth
     if [ ! -z ${REPO_USERNAME} ] && [ ! -z ${REPO_PASSWORD} ]; then
         echo "Executing: helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
