@@ -23,12 +23,15 @@ if [ -n "$HELM_REPOSITORY" ]; then
     HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
     #Verify basic auth
     if [ ! -z ${REPO_USERNAME} ] && [ ! -z ${REPO_PASSWORD} ]; then
-       DEPS_UPDATE_COMMAND="helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+        echo "Executing: helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+        helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}
     else
-       DEPS_UPDATE_COMMAND="helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+        echo "Executing: helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+        helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}
     fi
 else
-   DEPS_UPDATE_COMMAND="helm dependency update ${DEPLOY_CHART_PATH}"
+    echo "Executing: helm dependency update ${DEPLOY_CHART_PATH}"
+    helm dependency update ${DEPLOY_CHART_PATH}
 fi
 
 ####################
@@ -48,11 +51,5 @@ if [ -n "$DEPLOY_VALUES" ]; then
 fi
 UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
 
-
-####################
-# RUN COMMMANDS
-####################
-echo "Executing: ${DEPS_UPDATE_COMMAND}"
-${DEPS_UPDATE_COMMAND}
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
