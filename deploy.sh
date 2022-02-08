@@ -39,7 +39,7 @@ fi
 # Helm upgrade
 ####################
 
-UPGRADE_COMMAND="helm upgrade --timeout ${TIMEOUT}"
+UPGRADE_COMMAND="helm upgrade -i --timeout ${TIMEOUT}"
 for config_file in ${DEPLOY_CONFIG_FILES//,/ }
 do
     UPGRADE_COMMAND="${UPGRADE_COMMAND} -f ${config_file}"
@@ -57,6 +57,5 @@ else
     UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} repo/${HELM_CHART_NAME}"
 fi
     
-
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
