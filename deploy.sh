@@ -17,7 +17,6 @@ fi
 ####################
 # Dependency Update
 ####################
-echo "Variables: ${HELM_CHART_NAME} - ${REPO_USERNAME} - ${HELM_REPOSITORY}"
 # Verify local or remote repository
 if [  -z  ${HELM_CHART_NAME} ]; then
     HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
@@ -26,7 +25,7 @@ if [ ! -z "$HELM_REPOSITORY" ]; then
     #Verify basic auth
     if [ ! -z ${REPO_USERNAME} ] && [ ! -z ${REPO_PASSWORD} ]; then
         echo "Executing: helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
-        helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}
+        helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${REPO_NAME} ${HELM_REPOSITORY}
     else
         echo "Executing: helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
         helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}
@@ -51,7 +50,13 @@ fi
 if [ -n "$DEPLOY_VALUES" ]; then
     UPGRADE_COMMAND="${UPGRADE_COMMAND} --set ${DEPLOY_VALUES}"
 fi
-UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
+
+if [ -z "$HELM_REPOSITORY" ] && [ -z "$REPO_NAME" ]; then
+    UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
+else
+    UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${REPO_NAME}/${HELM_CHART_NAME}"
+fi
+    
 
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}

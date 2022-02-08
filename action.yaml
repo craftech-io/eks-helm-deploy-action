@@ -51,6 +51,9 @@ inputs:
         description: 'Update chart dependencies'
         required: false
         default: "true"
+    repo-name:
+        description: 'Name of the repository'
+        required: false
     repo-username:
         description: 'Username to authenticate to the repository.'
         required: false
@@ -75,5 +78,6 @@ runs:
         UPDATE_DEPS: ${{ inputs.update-deps }}
         HELM_REPOSITORY: ${{ inputs.chart-repository }}
         HELM_CHART_NAME: ${{ inputs.chart-name }}
+        REPO_NAME: ${{ inputs.repo-name }}
         REPO_USERNAME: ${{ inputs.repo-username }}
         REPO_PASSWORD: ${{ inputs.repo-password }}
