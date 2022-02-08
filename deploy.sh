@@ -17,7 +17,7 @@ fi
 ####################
 # Dependency Update
 ####################
-
+echo "Variables: ${HELM_CHART_NAME} - ${REPO_USERNAME} - ${HELM_REPOSITORY}}"
 # Verify local or remote repository
 if [  -z  ${HELM_CHART_NAME} ]; then
     HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
