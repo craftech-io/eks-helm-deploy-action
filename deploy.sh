@@ -24,8 +24,8 @@ fi
 if [ ! -z "$HELM_REPOSITORY" ]; then
     #Verify basic auth
     if [ ! -z ${REPO_USERNAME} ] && [ ! -z ${REPO_PASSWORD} ]; then
-        echo "Executing: helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" repo ${HELM_REPOSITORY}"
-        helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" repo ${HELM_REPOSITORY}
+        echo "Executing: helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+        helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}
     else
         echo "Executing: helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
         helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}
@@ -54,7 +54,7 @@ fi
 if [ -z "$HELM_REPOSITORY" ]; then
     UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
 else
-    UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} repo/${HELM_CHART_NAME}"
+    UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${HELM_CHART_NAME}/${HELM_CHART_NAME}"
 fi
     
 echo "Executing: ${UPGRADE_COMMAND}"
