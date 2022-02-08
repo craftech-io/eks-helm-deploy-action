@@ -48,6 +48,12 @@ inputs:
         description: 'Update chart dependencies'
         required: false
         default: "true"
+    repo-username:
+        description: 'Username to authenticate to the repository.'
+        required: false
+    repo-password:
+        description: 'Password to authenticate to repository.'
+        required: false
 runs:
     using: 'docker'
     image: 'Dockerfile'
@@ -65,3 +71,5 @@ runs:
         TIMEOUT: ${{ inputs.timeout }}
         UPDATE_DEPS: ${{ inputs.update-deps }}
         HELM_REPOSITORY: ${{ inputs.chart-repository }}
+        REPO_USERNAME: ${{ inputs.repo-username }}
+        REPO_PASSWORD: ${{ inputs.repo-password }}
