@@ -20,7 +20,9 @@ fi
 
 # Verify local or remote repository
 if [ -n "$HELM_REPOSITORY" ]; then
-    HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
+    if [  -z  ${HELM_CHART_NAME} ]; then
+        HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
+    fi
     #Verify basic auth
     if [ ! -z ${REPO_USERNAME} ] && [ ! -z ${REPO_PASSWORD} ]; then
         echo "Executing: helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
