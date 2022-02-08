@@ -14,12 +14,26 @@ fi
 
 # Helm Deployment
 
+####################
+# Dependency Update
+####################
+
+# Verify local or remote repository
 if [ -n "$HELM_REPOSITORY" ]; then
-   HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
-   DEPS_UPDATE_COMMAND="helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+    HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
+    #Verify basic auth
+    if [ ! -z ${REPO_USERNAME} ] && [ ! -z ${REPO_PASSWORD} ]; then
+       DEPS_UPDATE_COMMAND="helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+    else
+       DEPS_UPDATE_COMMAND="helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+    fi
 else
    DEPS_UPDATE_COMMAND="helm dependency update ${DEPLOY_CHART_PATH}"
 fi
+
+####################
+# Helm upgrade
+####################
 
 UPGRADE_COMMAND="helm upgrade --timeout ${TIMEOUT}"
 for config_file in ${DEPLOY_CONFIG_FILES//,/ }
@@ -33,6 +47,11 @@ if [ -n "$DEPLOY_VALUES" ]; then
     UPGRADE_COMMAND="${UPGRADE_COMMAND} --set ${DEPLOY_VALUES}"
 fi
 UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
+
+
+####################
+# RUN COMMMANDS
+####################
 echo "Executing: ${DEPS_UPDATE_COMMAND}"
 ${DEPS_UPDATE_COMMAND}
 echo "Executing: ${UPGRADE_COMMAND}"

@@ -40,6 +40,9 @@ inputs:
     chart-repository:
         description: 'The repository of the chart.'
         required: false
+    chart-name:
+        description: 'Chart name in the repository'
+        required: false
     timeout:
         description: 'Timeout for the job.'
         required: true
@@ -71,5 +74,6 @@ runs:
         TIMEOUT: ${{ inputs.timeout }}
         UPDATE_DEPS: ${{ inputs.update-deps }}
         HELM_REPOSITORY: ${{ inputs.chart-repository }}
+        HELM_CHART_NAME: ${{ inputs.chart-name }}
         REPO_USERNAME: ${{ inputs.repo-username }}
         REPO_PASSWORD: ${{ inputs.repo-password }}

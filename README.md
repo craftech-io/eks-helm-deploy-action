@@ -19,10 +19,15 @@ Following inputs can be used as `step.with` keys
 | `namespace`      | String  | Kubernetes namespace to use. |
 | `values`      | String  | Comma separates list of value set for helms. e.x: key1=value1,key2=value2 |
 | `name`      | String  | The name of the helm release |
-| `chart-path`      | String  | The path to the chart. (defaults to `helm/`) |
+| `chart-path`      | String  | The path to the chart. (defaults to `helm/`) (For local repo)|
+| `chart-repository`    | String | The URL of the chart repository. (For remote repo)|
+| `chart-name`    | String | Helm chart name inside the repository. (For remote repo)|
+| `repo-username`   | String | Username for repository basic auth|
+| `repo-password`   | String | Password for repository basic auth|
 
 
 ## Example usage
+#### Local repository
 
 ```yaml
 uses: craftech-io/eks-helm-deploy-action@v1
@@ -33,6 +38,42 @@ with:
   cluster-name: mycluster
   config-files: .github/values/dev.yaml
   chart-path: chart/
+  namespace: dev
+  values: key1=value1,key2=value2
+  name: release_name
+```
+
+#### Remote repository
+
+```yaml
+uses: craftech-io/eks-helm-deploy-action@v1
+with:
+  aws-access-key-id: ${{ secrets.AWS_ACCESS__KEY_ID }}
+  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  aws-region: us-west-2
+  cluster-name: mycluster
+  config-files: .github/values/dev.yaml
+  chart-repository: https://chartmuseum.mgt.example.com
+  chart-name: example
+  namespace: dev
+  values: key1=value1,key2=value2
+  name: release_name
+```
+
+#### Remote repository w/basic auth
+
+```yaml
+uses: craftech-io/eks-helm-deploy-action@v1
+with:
+  aws-access-key-id: ${{ secrets.AWS_ACCESS__KEY_ID }}
+  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  aws-region: us-west-2
+  cluster-name: mycluster
+  config-files: .github/values/dev.yaml
+  chart-repository: https://chartmuseum.mgt.example.com
+  chart-name: example
+  repo-username: user
+  repo-password: aV3ryC0mpl3xP455w0rd
   namespace: dev
   values: key1=value1,key2=value2
   name: release_name
