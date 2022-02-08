@@ -14,14 +14,32 @@ fi
 
 # Helm Deployment
 
-if [ -n "$HELM_REPOSITORY" ]; then
-   HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
-   DEPS_UPDATE_COMMAND="helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+####################
+# Dependency Update
+####################
+# Verify local or remote repository
+if [  -z  ${HELM_CHART_NAME} ]; then
+    HELM_CHART_NAME=${DEPLOY_CHART_PATH%/*}
+fi
+if [ ! -z "$HELM_REPOSITORY" ]; then
+    #Verify basic auth
+    if [ ! -z ${REPO_USERNAME} ] && [ ! -z ${REPO_PASSWORD} ]; then
+        echo "Executing: helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+        helm repo add  --username="${REPO_USERNAME}" --password="${REPO_PASSWORD}" ${HELM_CHART_NAME} ${HELM_REPOSITORY}
+    else
+        echo "Executing: helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}"
+        helm repo add ${HELM_CHART_NAME} ${HELM_REPOSITORY}
+    fi
 else
-   DEPS_UPDATE_COMMAND="helm dependency update ${DEPLOY_CHART_PATH}"
+    echo "Executing: helm dependency update ${DEPLOY_CHART_PATH}"
+    helm dependency update ${DEPLOY_CHART_PATH}
 fi
 
-UPGRADE_COMMAND="helm upgrade --timeout ${TIMEOUT}"
+####################
+# Helm upgrade
+####################
+
+UPGRADE_COMMAND="helm upgrade -i --timeout ${TIMEOUT}"
 for config_file in ${DEPLOY_CONFIG_FILES//,/ }
 do
     UPGRADE_COMMAND="${UPGRADE_COMMAND} -f ${config_file}"
@@ -32,8 +50,12 @@ fi
 if [ -n "$DEPLOY_VALUES" ]; then
     UPGRADE_COMMAND="${UPGRADE_COMMAND} --set ${DEPLOY_VALUES}"
 fi
-UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
-echo "Executing: ${DEPS_UPDATE_COMMAND}"
-${DEPS_UPDATE_COMMAND}
+
+if [ -z "$HELM_REPOSITORY" ]; then
+    UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${DEPLOY_CHART_PATH}"
+else
+    UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${HELM_CHART_NAME}/${HELM_CHART_NAME}"
+fi
+    
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
