@@ -60,6 +60,9 @@ inputs:
     repo-password:
         description: 'Password to authenticate to repository.'
         required: false
+    chart-version:
+        description: 'The version number of the chart.'
+        required: false
 runs:
     using: 'docker'
     image: 'Dockerfile'
@@ -81,3 +84,4 @@ runs:
         REPO_NAME: ${{ inputs.repo-name }}
         REPO_USERNAME: ${{ inputs.repo-username }}
         REPO_PASSWORD: ${{ inputs.repo-password }}
+        CHART_VERSION: ${{ inputs.chart-version }}
