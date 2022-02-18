@@ -24,6 +24,7 @@ Following inputs can be used as `step.with` keys
 | `chart-name`    | String | Helm chart name inside the repository. (For remote repo)|
 | `repo-username`   | String | Username for repository basic auth|
 | `repo-password`   | String | Password for repository basic auth|
+| `chart-version`   | String | The version number of the chart|
 
 
 ## Example usage
@@ -55,6 +56,7 @@ with:
   config-files: .github/values/dev.yaml
   chart-repository: https://chartmuseum.mgt.example.com
   chart-name: example
+  chart-version: 1.0.0
   namespace: dev
   values: key1=value1,key2=value2
   name: release_name
@@ -72,6 +74,7 @@ with:
   config-files: .github/values/dev.yaml
   chart-repository: https://chartmuseum.mgt.example.com
   chart-name: example
+  chart-version: 1.0.0
   repo-username: user
   repo-password: aV3ryC0mpl3xP455w0rd
   namespace: dev
