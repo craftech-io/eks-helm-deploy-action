@@ -56,6 +56,10 @@ if [ -z "$HELM_REPOSITORY" ]; then
 else
     UPGRADE_COMMAND="${UPGRADE_COMMAND} ${DEPLOY_NAME} ${HELM_CHART_NAME}/${HELM_CHART_NAME}"
 fi
+
+if [ -n "$CHART_VERSION" ]; then
+    UPGRADE_COMMAND="${UPGRADE_COMMAND} --version ${CHART_VERSION}"
+fi
     
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
