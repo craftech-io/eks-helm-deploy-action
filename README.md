@@ -47,7 +47,7 @@ with:
 #### Remote repository
 
 ```yaml
-uses: craftech-io/eks-helm-deploy-action@v1
+uses: craftech-io/eks-helm-deploy-action@v2.0.0-rc3
 with:
   aws-access-key-id: ${{ secrets.AWS_ACCESS__KEY_ID }}
   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -65,7 +65,7 @@ with:
 #### Remote repository w/basic auth
 
 ```yaml
-uses: craftech-io/eks-helm-deploy-action@v1
+uses: craftech-io/eks-helm-deploy-action@v2.0.0-rc3
 with:
   aws-access-key-id: ${{ secrets.AWS_ACCESS__KEY_ID }}
   aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
