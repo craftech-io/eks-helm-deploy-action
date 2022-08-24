@@ -63,3 +63,5 @@ fi
     
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
+
+kubectl rollout status deployment/${DEPLOY_NAME}
