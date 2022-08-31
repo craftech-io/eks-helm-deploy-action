@@ -46,7 +46,7 @@ inputs:
     timeout:
         description: 'Timeout for the job.'
         required: true
-        default: 0
+        default: '0'
     update-deps:
         description: 'Update chart dependencies'
         required: false
@@ -63,6 +63,14 @@ inputs:
     chart-version:
         description: 'The version number of the chart.'
         required: false
+    helm-ecr-aws-account-id:
+        description: 'AWS account ID for the helm ECR'
+        required: false
+        default: ''
+    helm-ecr-aws-region:
+        description: 'AWS region for the helm ECR'
+        required: false
+        default: ''
 runs:
     using: 'docker'
     image: 'Dockerfile'
@@ -85,3 +93,5 @@ runs:
         REPO_USERNAME: ${{ inputs.repo-username }}
         REPO_PASSWORD: ${{ inputs.repo-password }}
         CHART_VERSION: ${{ inputs.chart-version }}
+        HELM_ECR_AWS_ACCOUNT_ID: ${{ inputs.helm-ecr-aws-account-id }}
+        HELM_ECR_AWS_REGION: ${{ inputs.helm-ecr-aws-region }}
