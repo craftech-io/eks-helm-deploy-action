@@ -12,9 +12,8 @@ inputs:
         description: 'AWS credentials used to login to eks.'
         required: true
     aws-region:
-        description: 'AWS region to use (default: us-west-2)'
+        description: 'AWS region to use'
         required: true
-        default: us-west-2
     cluster-name:
         description: 'EKS cluster name.'
         required: true
