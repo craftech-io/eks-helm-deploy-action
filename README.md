@@ -26,7 +26,7 @@ Following inputs can be used as `step.with` keys
 | `repo-password`           | String | Password for repository basic auth                                               |
 | `chart-version`           | String | The version number of the chart                                                  |
 | `helm-ecr-aws-account-id` | String | AWS account ID for the helm ECR                                                  |
-|                           | String | AWS region for the helm ECR                                                      |
+| `helm-ecr-aws-region`     | String | AWS region for the helm ECR                                                      |
 
 
 ## Example usage
