@@ -36,7 +36,7 @@ inputs:
     chart-path:
         description: 'The path of the chart.'
         required: false
-        default: 'helm/'
+        default: ''
     chart-repository:
         description: 'The repository of the chart.'
         required: false

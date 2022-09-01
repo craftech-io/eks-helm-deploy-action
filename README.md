@@ -19,7 +19,7 @@ Following inputs can be used as `step.with` keys
 | `namespace`               | String | Kubernetes namespace to use.                                                     |
 | `values`                  | String | Comma separates list of value set for helms. e.x: key1=value1,key2=value2        |
 | `name`                    | String | The name of the helm release                                                     |
-| `chart-path`              | String | The path to the chart. (defaults to `helm/`) (For local repo)                    |
+| `chart-path`              | String | The path to the chart. (For local helm chart)                                    |
 | `chart-repository`        | String | The URL of the chart repository. (For remote repo)                               |
 | `chart-name`              | String | Helm chart name inside the repository. (For remote repo)                         |
 | `repo-username`           | String | Username for repository basic auth                                               |
