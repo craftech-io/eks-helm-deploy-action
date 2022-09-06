@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM public.ecr.aws/docker/library/python:3.9.13-slim-buster
 
 ARG KUBECTL_VERSION=1.22.12
 # Install the toolset.
