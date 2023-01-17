@@ -72,6 +72,8 @@ if [ -n "$CHART_VERSION" ]; then
   UPGRADE_COMMAND="${UPGRADE_COMMAND} --version ${CHART_VERSION}"
 fi
 
+UPGRADE_COMMAND="${UPGRADE_COMMAND} | grep FAILED -vqz"
+
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
 
