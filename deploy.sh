@@ -72,9 +72,10 @@ if [ -n "$CHART_VERSION" ]; then
   UPGRADE_COMMAND="${UPGRADE_COMMAND} --version ${CHART_VERSION}"
 fi
 
-UPGRADE_COMMAND="! ${UPGRADE_COMMAND} | grep FAILED"
+UPGRADE_COMMAND="${UPGRADE_COMMAND}"
 
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
+echo $?
 
 kubectl rollout status deployment/${DEPLOY_NAME}
