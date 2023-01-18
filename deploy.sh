@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -o pipefail
 
 # Login to Kubernetes Cluster.
 if [ -n "$CLUSTER_ROLE_ARN" ]; then
@@ -76,6 +77,5 @@ UPGRADE_COMMAND="${UPGRADE_COMMAND}"
 
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
-echo $?
 
 kubectl rollout status deployment/${DEPLOY_NAME}
