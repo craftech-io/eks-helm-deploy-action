@@ -78,4 +78,4 @@ UPGRADE_COMMAND="${UPGRADE_COMMAND}"
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
 
-kubectl rollout status deployment/${DEPLOY_NAME}
+kubectl -n ${DEPLOY_NAMESPACE} rollout status deployment/${DEPLOY_NAME}
