@@ -88,7 +88,7 @@ runs:
         DEPLOY_VALUES: ${{ inputs.values }}
         DEPLOY_NAME: ${{ inputs.name }}
         DEPLOY_CHART_PATH: ${{ inputs.chart-path }}
-        DEPLOY_STATEFULSET: $${{ inputs.statefulset }}
+        DEPLOY_STATEFULSET: ${{ inputs.statefulset }}
         TIMEOUT: ${{ inputs.timeout }}
         UPDATE_DEPS: ${{ inputs.update-deps }}
         HELM_REPOSITORY: ${{ inputs.chart-repository }}
