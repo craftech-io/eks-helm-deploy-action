@@ -78,4 +78,8 @@ UPGRADE_COMMAND="${UPGRADE_COMMAND}"
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
 
-kubectl -n ${DEPLOY_NAMESPACE} rollout status deployment/${DEPLOY_NAME}
+if [ ${DEPLOY_STATEFULSET} == "true" ]; then
+  kubectl -n ${DEPLOY_NAMESPACE} rollout status statefulset/${DEPLOY_NAME}
+else
+  kubectl -n ${DEPLOY_NAMESPACE} rollout status deployment/${DEPLOY_NAME}
+fi

@@ -70,6 +70,10 @@ inputs:
         description: 'AWS region for the helm ECR'
         required: false
         default: ''
+    statefulset:
+        description: 'Deployment is a statefulset'
+        required: false
+        default: "false"
 runs:
     using: 'docker'
     image: 'Dockerfile'
@@ -84,6 +88,7 @@ runs:
         DEPLOY_VALUES: ${{ inputs.values }}
         DEPLOY_NAME: ${{ inputs.name }}
         DEPLOY_CHART_PATH: ${{ inputs.chart-path }}
+        DEPLOY_STATEFULSET: $${{ inputs.statefulset }}
         TIMEOUT: ${{ inputs.timeout }}
         UPDATE_DEPS: ${{ inputs.update-deps }}
         HELM_REPOSITORY: ${{ inputs.chart-repository }}
