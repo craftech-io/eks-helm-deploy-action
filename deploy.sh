@@ -47,7 +47,7 @@ for config_file in ${DEPLOY_CONFIG_FILES//,/ }; do
 done
 
 if [ -n "$DEPLOY_NAMESPACE" ]; then
-  UPGRADE_COMMAND="${UPGRADE_COMMAND} -n ${DEPLOY_NAMESPACE}"
+  UPGRADE_COMMAND="${UPGRADE_COMMAND} -n ${DEPLOY_NAMESPACE} --create-namespace"
 fi
 
 if [ -n "$DEPLOY_VALUES" ]; then
