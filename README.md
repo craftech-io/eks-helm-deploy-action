@@ -10,6 +10,7 @@ Following inputs can be used as `step.with` keys
 
 | Name                      | Type   | Description                                                                      |
 |---------------------------|--------|----------------------------------------------------------------------------------|
+| `atomic`                  | String | Roll the install/upgrade back in the face of failure.                            |
 | `aws-secret-access-key`   | String | AWS secret access key part of the aws credentials. This is used to login to EKS. |
 | `aws-access-key-id`       | String | AWS access key id part of the aws credentials. This is used to login to EKS.     |
 | `aws-region`              | String | AWS region to use. This must match the region your desired cluster lies in.      |

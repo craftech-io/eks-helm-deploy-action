@@ -5,6 +5,11 @@ branding:
     icon: anchor
     color: yellow
 inputs:
+    atomic:
+        description: 'Whether helm should roll back in the face of failure'
+        required: false
+        type: boolean
+        default: false
     aws-secret-access-key:
         description: 'AWS credentials used to login to eks.'
         required: false
@@ -74,6 +79,7 @@ runs:
     using: 'docker'
     image: 'Dockerfile'
     env:
+        ATOMIC: ${{ inputs.atomic }}
         AWS_REGION: ${{ inputs.aws-region }}
         AWS_SECRET_ACCESS_KEY: ${{ inputs.aws-secret-access-key }}
         AWS_ACCESS_KEY_ID: ${{ inputs.aws-access-key-id }}
