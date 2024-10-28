@@ -47,7 +47,7 @@ for config_file in ${DEPLOY_CONFIG_FILES//,/ }; do
 done
 
 if [ ${ATOMIC} == "true" ]; then
-  ATOMIC="${UPGRADE_COMMAND} --atomic"
+  UPGRADE_COMMAND="${UPGRADE_COMMAND} --atomic"
 fi
 
 if [ -n "$DEPLOY_NAMESPACE" ]; then
