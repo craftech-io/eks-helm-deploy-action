@@ -8,8 +8,7 @@ inputs:
     atomic:
         description: 'Whether helm should roll back in the face of failure'
         required: false
-        type: boolean
-        default: false
+        default: "false"
     aws-secret-access-key:
         description: 'AWS credentials used to login to eks.'
         required: false
