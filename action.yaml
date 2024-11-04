@@ -46,6 +46,9 @@ inputs:
         description: 'Timeout for the job.'
         required: true
         default: '0'
+    atomic:
+        description: Whether or not to do an atomic release. Setting this to a non-empty value will trigger atomic releases
+        required: false
     update-deps:
         description: 'Update chart dependencies'
         required: false

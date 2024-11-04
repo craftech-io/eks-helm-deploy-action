@@ -72,5 +72,9 @@ if [ -n "$CHART_VERSION" ]; then
   UPGRADE_COMMAND="${UPGRADE_COMMAND} --version ${CHART_VERSION}"
 fi
 
+if [ -n "$INPUT_ATOMIC" ]; then
+  UPGRADE_COMMAND="${UPGRADE_COMMAND} --atomic"
+fi
+
 echo "Executing: ${UPGRADE_COMMAND}"
 ${UPGRADE_COMMAND}
