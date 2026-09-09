@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/python:3.9.13-slim-bullseye
+FROM public.ecr.aws/docker/library/python:3.9.25-slim-bookworm
 
 ARG KUBECTL_VERSION=1.22.12
 # Install the toolset.
